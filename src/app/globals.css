@@ -1999,12 +1999,12 @@ a.card:hover .card-img img{transform:scale(1.06)}
   .hero{background:#eefbfa;padding-bottom:0}
   .hero .container.hero-grid{display:grid;grid-template-columns:1fr;padding-top:28px;padding-bottom:56px;position:relative}
   .hero-grid>.hero-slider{grid-area:1/1;transform:none;width:100%;aspect-ratio:auto;min-height:600px;height:100%;border-radius:28px;border:0;box-shadow:0 30px 60px -28px rgba(13,48,66,.5)}
-  .hero-slider::after{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;background:linear-gradient(90deg,rgba(8,30,46,.8) 0%,rgba(8,30,46,.62) 40%,rgba(8,30,46,.1) 74%,rgba(8,30,46,0) 100%)}
+  .hero-slider::after{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;background:linear-gradient(90deg,rgba(8,30,46,.56) 0%,rgba(8,30,46,.34) 34%,rgba(8,30,46,0) 62%)}
   .hero-grid>.hero-copy{grid-area:1/1;z-index:3;align-self:center;padding:56px 56px;max-width:660px}
-  .hero h1{color:#fff;max-width:16ch;font-size:clamp(2.6rem,4.2vw,4rem);text-shadow:0 2px 24px rgba(0,0,0,.25)}
+  .hero h1{color:#fff;max-width:16ch;font-size:clamp(2.6rem,4.2vw,4rem);text-shadow:0 2px 22px rgba(0,0,0,.45),0 1px 3px rgba(0,0,0,.3)}
   .hero h1 .hl{color:#7be3da;text-decoration-color:var(--sun)}
-  .hero .lead{color:rgba(255,255,255,.92);max-width:52ch}
-  .hero-tags{color:#fff}
+  .hero .lead{color:#fff;max-width:52ch;text-shadow:0 1px 14px rgba(0,0,0,.55),0 1px 2px rgba(0,0,0,.35)}
+  .hero-tags{color:#fff;text-shadow:0 1px 10px rgba(0,0,0,.55)}
   .hero-tags .ico{color:#7be3da}
   .hero-copy .btn-ghost{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.5);color:#fff}
   .hs-slide figcaption{display:none}
