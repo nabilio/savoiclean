@@ -1993,3 +1993,12 @@ a.card:hover .card-img img{transform:scale(1.06)}
 .footer-zones{gap:6px 18px}
 .hero h1{font-weight:600;letter-spacing:-.03em;line-height:1.08;max-width:14ch;color:var(--navy-900)}
 .hero h1 .hl{font-weight:700;background:none;padding:0;margin:0;border-radius:0;color:var(--teal-600);text-decoration:underline;text-decoration-color:rgba(255,201,77,.9);text-decoration-thickness:.07em;text-underline-offset:.16em;text-decoration-skip-ink:none}
+
+/* ---- Accueil ordinateur : texte et boutons en haut, bannière pleine largeur dessous ---- */
+@media(min-width:901px){
+  .hero .container.hero-grid{grid-template-columns:1fr;gap:40px;padding-top:56px;padding-bottom:84px;align-items:start}
+  .hero h1{max-width:20ch;font-size:clamp(2.6rem,4.4vw,4.2rem)}
+  .hero .lead{max-width:64ch}
+  .hero-grid>.hero-slider{transform:none;width:100%;aspect-ratio:21/9;border-radius:24px}
+}
+.hero h1{text-wrap:balance}

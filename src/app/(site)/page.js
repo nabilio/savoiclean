@@ -85,9 +85,6 @@ export default async function Home() {
       <section className="hero">
         <div className="container hero-grid">
           <div className="hero-copy">
-          <span className="eyebrow">
-            <Icon name="snow" size={16} /> Nettoyage pro · Savoie · Haute-Savoie · Stations
-          </span>
           <h1>
             {String(s.hero_title || '')
               .split(/(\*[^*]+\*)/)
