@@ -103,6 +103,21 @@ export async function saveSettings(fd) {
   const back = safeBack(fd.get('_back'), '/admin/parametres');
   const current = await loadSettings();
   for (const f of group.fields) {
+    if (f.type === 'image') {
+      const file = fd.get(`${f.name}__file`);
+      if (file && typeof file === 'object' && file.size > 0) {
+        if (file.size > 4 * 1024 * 1024) go(back, 'err', 'image');
+        const buf = Buffer.from(await file.arrayBuffer());
+        const mime = detectImage(buf);
+        if (!mime) go(back, 'err', 'image');
+        const r = await run('INSERT INTO media (mime, name, data, created_at) VALUES (?,?,?,?)', [mime, clip(file.name, 190), buf, nowStamp()]);
+        const sv = String(r.insertId);
+        const row = await one('SELECT k FROM settings WHERE k = ?', [f.name]);
+        if (row) await run('UPDATE settings SET v = ? WHERE k = ?', [sv, f.name]);
+        else await run('INSERT INTO settings (k, v) VALUES (?,?)', [f.name, sv]);
+      }
+      continue;
+    }
     let v = clip(fd.get(f.name), f.type === 'rich' ? 40000 : 6000);
     if (f.required && !v) go(back, 'err', 'required');
     if (f.name === 'whatsapp_number') {
@@ -369,10 +384,23 @@ export async function resetTotp(_prev, fd) {
 /* ---------------- Administrateurs ---------------- */
 const ADM = '/admin/parametres/administrateurs';
 
+// Si l'administrateur connecté a la double authentification, son code à 6 chiffres est exigé.
+async function confirm2fa(me, fd) {
+  if (!me.totp_enabled) return;
+  if (!(await rateLimit(`adm2fa:${me.id}`, 8, 600))) go(ADM, 'err', 'limit');
+  const step = verifyTotp(decryptText(me.totp_secret_enc), String(fd.get('code') || '').trim(), me.totp_last_step);
+  if (!step) {
+    await audit('2fa_failed', { userId: me.id, email: me.email, detail: 'admin_change' });
+    go(ADM, 'err', 'bad2fa');
+  }
+  await run('UPDATE users SET totp_last_step = ? WHERE id = ?', [step, me.id]);
+}
+
 export async function addAdmin(fd) {
   const me = await requireAdmin();
   if (!(await rateLimit(`addadm:${me.id}`, 6, 900))) go(ADM, 'err', 'limit');
   if (!(await checkPassword(String(fd.get('current') || ''), me.pass_hash))) go(ADM, 'err', 'badpwd');
+  await confirm2fa(me, fd);
   const email = String(fd.get('email') || '').trim().toLowerCase().slice(0, 190);
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) go(ADM, 'err', 'adm_email');
   const pw = String(fd.get('password') || '');
@@ -386,6 +414,7 @@ export async function addAdmin(fd) {
 
 export async function deleteAdmin(fd) {
   const me = await requireAdmin();
+  await confirm2fa(me, fd);
   const id = Number(fd.get('id'));
   const target = await one('SELECT * FROM users WHERE id = ?', [id]);
   if (!target) go(ADM, 'err', 'adm_missing');

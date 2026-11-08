@@ -38,6 +38,9 @@ export default async function Admins({ searchParams }) {
                     {users.length > 1 ? (
                       <form action={deleteAdmin}>
                         <input type="hidden" name="id" value={u.id} />
+                        {me.totp_enabled ? (
+                          <input name="code" inputMode="numeric" autoComplete="one-time-code" pattern="[0-9]{6}" maxLength={6} placeholder="Code 2FA" aria-label="Code de double authentification" required style={{ width: 110, marginRight: 8 }} />
+                        ) : null}
                         <ConfirmButton
                           className="btn btn-danger btn-sm"
                           message={
@@ -79,6 +82,12 @@ export default async function Admins({ searchParams }) {
             <label htmlFor="cur">Votre mot de passe (pour confirmer)</label>
             <input id="cur" name="current" type="password" autoComplete="current-password" required />
           </div>
+          {me.totp_enabled ? (
+            <div className="field full">
+              <label htmlFor="c2">Code de double authentification (6 chiffres)</label>
+              <input id="c2" name="code" inputMode="numeric" autoComplete="one-time-code" pattern="[0-9]{6}" maxLength={6} required />
+            </div>
+          ) : null}
           <p className="muted full" style={{ margin: 0 }}>
             12 caractères minimum, avec majuscule, minuscule et chiffre. Transmettez ce mot de passe à la personne : elle pourra le changer ensuite dans Sécurité, et activera la double authentification à sa première connexion.
           </p>

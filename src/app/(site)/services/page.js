@@ -30,7 +30,7 @@ export default async function Services() {
             {services.map((x) => (
               <Link key={x.slug} href={`/services/${x.slug}`} className="card card-photo">
                 <span className="card-img">
-                  <img src={serviceImg(x.slug)} alt="" loading="lazy" width="600" height="400" />
+                  <img src={serviceImg(x)} alt="" loading="lazy" width="600" height="400" />
                 </span>
                 <span>
                   <span className={`tag ${x.audience === 'B2B' ? 'b2b' : ''}`}>{x.audience === 'B2B' ? 'Professionnels' : x.audience === 'Tous' ? 'Pros & particuliers' : x.audience}</span>

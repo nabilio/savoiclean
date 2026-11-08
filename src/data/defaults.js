@@ -18,6 +18,8 @@ export const DEFAULT_SETTINGS = {
   about_text:
     'Nous intervenons chez les professionnels comme chez les particuliers, de Chambéry à Annecy et dans toutes les stations de Savoie et de Haute-Savoie. Devis clair, planning respecté, résultat irréprochable : vous vous concentrez sur votre activité, nous nous occupons de la propreté.',
   b2b_title: 'Dédié aux professionnels et aux stations de ski',
+  b2b_image: '',
+  logo_image: '',
   b2b_text:
     'Hôtels, résidences de tourisme, chalets de location, agences immobilières, commerces, restaurants, remontées mécaniques, syndics et chantiers : nous organisons des interventions récurrentes ou ponctuelles, avant la saison, entre deux séjours et après les travaux.',
   vat_regime: 'normal',

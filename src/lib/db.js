@@ -73,7 +73,7 @@ const TABLES = [
     'services',
     `{ID}, slug VARCHAR(120) NOT NULL UNIQUE, name VARCHAR(190) NOT NULL, short TEXT, body LONGTEXT,
      meta_title VARCHAR(190), meta_description VARCHAR(300), icon VARCHAR(40), audience VARCHAR(20),
-     keywords TEXT, sort INT NOT NULL DEFAULT 0, visible TINYINT NOT NULL DEFAULT 1`,
+     keywords TEXT, image_id INT, sort INT NOT NULL DEFAULT 0, visible TINYINT NOT NULL DEFAULT 1`,
   ],
   [
     'zones',
@@ -153,6 +153,10 @@ export async function ready() {
     S.ready = (async () => {
       await connect();
       for (const stmt of ddl(S.driver)) await rawRun(stmt, []);
+      // migration : photo propre à chaque service (bases créées avant cette colonne)
+      try {
+        await rawRun('ALTER TABLE services ADD COLUMN image_id INT', []);
+      } catch {}
       const { seedIfEmpty } = await import('./seed.js');
       await seedIfEmpty({ query: rawQuery, run: rawRun });
     })().catch((e) => {

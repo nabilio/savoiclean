@@ -17,7 +17,9 @@ const MAP = [
   ['bureau', '/img/menage-aspirateur.jpg'],
   ['menage', '/img/menage.jpg'],
 ];
-export function serviceImg(slug = '') {
+export function serviceImg(x = '') {
+  if (x && typeof x === 'object' && x.image_id) return `/media/${x.image_id}`;
+  const slug = typeof x === 'object' ? x?.slug || '' : x;
   const k = MAP.find(([w]) => slug.includes(w));
   return k ? k[1] : '/img/menage-cuisine.jpg';
 }

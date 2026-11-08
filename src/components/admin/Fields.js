@@ -19,6 +19,7 @@ const ERR = {
   locked: 'Ce document est verrouillé et ne peut plus être modifié.',
   lines: 'Ajoutez au moins une ligne avec une désignation et un prix.',
   client: 'Choisissez un client ou saisissez son nom.',
+  bad2fa: 'Code de double authentification incorrect ou expiré.',
   badpwd: 'Mot de passe actuel incorrect.',
   weakpwd: 'Mot de passe trop faible (12 caractères min., majuscule, minuscule, chiffre).',
   nomatch: 'Les mots de passe ne correspondent pas.',

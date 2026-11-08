@@ -1,5 +1,6 @@
 import 'server-only';
 import { PDFDocument, StandardFonts, rgb } from 'pdf-lib';
+import { one } from './db';
 import { fmtEUR, fmtDate, lineTotal, computeTotals } from './money';
 
 const NAVY = rgb(0.047, 0.145, 0.259);
@@ -68,8 +69,33 @@ export async function buildDocumentPdf({ doc, client, settings }) {
   const isInvoice = doc.type === 'facture';
   const company = settings.legal_name || settings.brand_name;
 
+  // --- Logo (image importée dans Paramètres, sinon logo par défaut dessiné) ---
+  const LOGO = 44;
+  let logoDone = false;
+  const logoId = Number(settings.logo_image || 0);
+  if (logoId) {
+    try {
+      const m = await one('SELECT mime, data FROM media WHERE id = ?', [logoId]);
+      if (m && (m.mime === 'image/png' || m.mime === 'image/jpeg')) {
+        const img = m.mime === 'image/png' ? await pdf.embedPng(m.data) : await pdf.embedJpg(m.data);
+        const sc = Math.min(LOGO / img.height, 110 / img.width);
+        page.drawImage(img, { x: M, y: y - img.height * sc + 4, width: img.width * sc, height: img.height * sc });
+        logoDone = img.width * sc;
+      }
+    } catch {}
+  }
+  if (!logoDone) {
+    const k = LOGO / 84;
+    const ox = M, oy = y + 4;
+    page.drawSvgPath('M42 6C58 26 70 38 70 52a28 28 0 0 1-56 0C14 38 26 26 42 6z', { x: ox, y: oy, scale: k, color: rgb(0.1, 0.64, 0.61) });
+    page.drawSvgPath('M50 40c-3-5-9-6-13-3s-3 8 3 10l6 2c6 2 6 8 1 10-4 2-10 1-14-3', { x: ox, y: oy, scale: k, borderColor: rgb(1, 1, 1), borderWidth: 5 * k, borderLineCap: 1 });
+    page.drawSvgPath('M64 14l2 5 5 2-5 2-2 5-2-5-5-2 5-2z', { x: ox, y: oy, scale: k, color: rgb(1, 0.79, 0.3) });
+    logoDone = LOGO;
+  }
+  const HX = M + logoDone + 12;
+
   // --- En-tête émetteur ---
-  text(company, M, y - 12, { size: 17, f: bold });
+  text(company, HX, y - 12, { size: 17, f: bold });
   let ly = y - 28;
   const issuerLines = [
     [settings.legal_form, settings.siren ? `SIREN ${settings.siren}` : ''].filter(Boolean).join(' – '),
@@ -78,7 +104,7 @@ export async function buildDocumentPdf({ doc, client, settings }) {
     settings.vat_number ? `TVA ${settings.vat_number}` : '',
   ].filter(Boolean);
   for (const l of issuerLines) {
-    text(l, M, ly, { size: 8.8, color: GREY });
+    text(l, HX, ly, { size: 8.8, color: GREY });
     ly -= 11.5;
   }
 

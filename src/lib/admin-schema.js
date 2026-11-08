@@ -17,6 +17,7 @@ export const ENTITIES = {
       { name: 'icon', label: 'Icône', type: 'select', options: SERVICE_ICONS },
       { name: 'sort', label: 'Ordre d’affichage', type: 'number' },
       { name: 'visible', label: 'Visible sur le site', type: 'bool' },
+      { name: 'image_id', label: 'Photo du service (facultatif) — conseillé : 1200 × 800 px, paysage 3:2, JPG/PNG/WebP, 4 Mo max', type: 'image', full: true, help: 'Remplace la photo par défaut. N’utilisez que des photos dont vous détenez les droits.' },
       { name: 'short', label: 'Résumé (cartes)', type: 'textarea', full: true },
       { name: 'body', label: 'Contenu de la page', type: 'rich', full: true, help: 'Paragraphes séparés par une ligne vide. « ## Titre » pour un sous-titre, « - » pour une liste.' },
       { name: 'meta_title', label: 'Titre Google (SEO)', type: 'text', full: true },
@@ -88,7 +89,7 @@ export const ENTITIES = {
     summary: ['visible'],
     fields: [
       { name: 'title', label: 'Légende (affichée sur l’image)', type: 'text', full: true },
-      { name: 'image_id', label: 'Image (JPG, PNG ou WebP, 4 Mo max)', type: 'image', full: true },
+      { name: 'image_id', label: 'Image — conseillé : 1600 × 1000 px, paysage, JPG/PNG/WebP, 4 Mo max', type: 'image', full: true },
       { name: 'alt', label: 'Texte alternatif (description pour Google et l’accessibilité)', type: 'text', full: true },
       { name: 'sort', label: 'Ordre d’affichage', type: 'number' },
       { name: 'visible', label: 'Visible sur le site', type: 'bool' },
@@ -106,7 +107,7 @@ export const ENTITIES = {
       { name: 'title', label: 'Titre', type: 'text', required: true, full: true },
       { name: 'service', label: 'Service', type: 'text' },
       { name: 'place', label: 'Lieu', type: 'text' },
-      { name: 'image_id', label: 'Photo (JPG, PNG ou WebP, 4 Mo max)', type: 'image', full: true },
+      { name: 'image_id', label: 'Photo — conseillé : 1200 × 900 px, paysage 4:3, JPG/PNG/WebP, 4 Mo max', type: 'image', full: true },
       { name: 'description', label: 'Description', type: 'textarea', full: true },
       { name: 'sort', label: 'Ordre d’affichage', type: 'number' },
       { name: 'visible', label: 'Visible sur le site', type: 'bool' },
@@ -124,6 +125,7 @@ export const SETTING_GROUPS = {
       { name: 'about_text', label: 'Texte « Pourquoi nous choisir »', type: 'textarea', full: true },
       { name: 'b2b_title', label: 'Titre section professionnels', type: 'text', full: true },
       { name: 'b2b_text', label: 'Texte section professionnels', type: 'textarea', full: true },
+      { name: 'b2b_image', label: 'Photo section professionnels (facultatif) — conseillé : 1000 × 1500 px, portrait 2:3, JPG/PNG/WebP, 4 Mo max', type: 'image', full: true, help: 'Remplace la photo par défaut. N’utilisez que des photos dont vous détenez les droits.' },
     ],
   },
   entreprise: {
@@ -131,6 +133,7 @@ export const SETTING_GROUPS = {
     fields: [
       { name: 'brand_name', label: 'Nom de la marque', type: 'text', required: true },
       { name: 'brand_slogan', label: 'Slogan du logo', type: 'text' },
+      { name: 'logo_image', label: 'Logo pour devis et factures (facultatif) — conseillé : 600 × 300 px max, PNG ou JPG, 4 Mo max', type: 'image', full: true, help: 'Remplace le logo par défaut sur les PDF. Fond transparent conseillé (PNG).' },
       { name: 'credit_text', label: 'Signature en bas de page', type: 'text', help: 'Texte libre affiché sous le copyright. Laissez vide pour ne rien afficher.' },
       { name: 'credit_url', label: 'Lien de la signature (facultatif)', type: 'text', help: 'Adresse complète, ex. https://…' },
       { name: 'credit_legal', label: 'Conception et réalisation (mentions légales)', type: 'text', help: 'Laissez vide pour retirer cette rubrique des mentions légales.' },

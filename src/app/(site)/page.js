@@ -157,7 +157,7 @@ export default async function Home() {
             {services.slice(0, 8).map((x) => (
               <Link key={x.slug} href={`/services/${x.slug}`} className="card card-photo">
                 <span className="card-img">
-                  <img src={serviceImg(x.slug)} alt="" loading="lazy" width="600" height="400" />
+                  <img src={serviceImg(x)} alt="" loading="lazy" width="600" height="400" />
                 </span>
                 <h3>{x.name}</h3>
                 <p>{x.short}</p>
@@ -208,8 +208,8 @@ export default async function Home() {
           </div>
           <div className="panel">
             <img
-              src="/img/hotel.jpg"
-              alt="Chariot de ménage et aspirateur dans un couloir d’hôtel"
+              src={s.b2b_image ? `/media/${s.b2b_image}` : '/img/hotel.jpg'}
+              alt={s.b2b_image ? '' : 'Chariot de ménage et aspirateur dans un couloir d’hôtel'}
               width="1000"
               height="1500"
               loading="lazy"

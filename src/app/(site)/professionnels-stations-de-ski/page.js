@@ -94,7 +94,7 @@ export default async function Pros() {
             {b2b.map((x) => (
               <Link key={x.slug} href={`/services/${x.slug}`} className="card card-photo">
                 <span className="card-img">
-                  <img src={serviceImg(x.slug)} alt="" loading="lazy" width="600" height="400" />
+                  <img src={serviceImg(x)} alt="" loading="lazy" width="600" height="400" />
                 </span>
                 <h3>{x.name}</h3>
                 <p>{x.short}</p>
