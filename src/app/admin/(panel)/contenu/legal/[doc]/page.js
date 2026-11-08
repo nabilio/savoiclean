@@ -6,7 +6,7 @@ import SettingsGroup from '@/components/admin/SettingsGroup';
 import { LEGAL_TEMPLATES } from '@/data/legal-templates';
 
 export const dynamic = 'force-dynamic';
-const MAP = { mentions: ['legal_mentions', '/mentions-legales'], confidentialite: ['legal_privacy', '/confidentialite'], cgv: ['legal_cgv', '/cgv'] };
+const MAP = { mentions: ['legal_mentions', '/mentions-legales'], confidentialite: ['legal_privacy', '/confidentialite'] };
 
 export default async function LegalDoc({ params, searchParams }) {
   const { doc } = await params;

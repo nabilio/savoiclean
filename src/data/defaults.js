@@ -29,7 +29,6 @@ export const DEFAULT_SETTINGS = {
   mediator_url: '',
   legal_mentions: '',
   legal_privacy: '',
-  legal_cgv: '',
   vat_number: '',
   legal_address: '',
   director: '',

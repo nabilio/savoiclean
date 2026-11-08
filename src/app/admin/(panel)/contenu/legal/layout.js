@@ -10,7 +10,6 @@ export default function LegalLayout({ children }) {
         items={[
           { href: '/admin/contenu/legal/mentions', label: 'Mentions légales' },
           { href: '/admin/contenu/legal/confidentialite', label: 'Confidentialité' },
-          { href: '/admin/contenu/legal/cgv', label: 'CGV' },
         ]}
       />
       {children}

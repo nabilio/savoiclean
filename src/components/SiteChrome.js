@@ -130,9 +130,6 @@ export function Footer({ settings, services, zones }) {
                   <Link href="/confidentialite">Confidentialité</Link>
                 </li>
                 <li>
-                  <Link href="/cgv">CGV</Link>
-                </li>
-                <li>
                   <CookieSettingsLink />
                 </li>
               </ul>

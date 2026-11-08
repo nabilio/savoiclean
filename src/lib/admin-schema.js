@@ -170,7 +170,6 @@ export const SETTING_GROUPS = {
 const LEGAL_HELP = 'Laissez le champ vide pour revenir au modèle. Variables disponibles : {{legal_name}}, {{siren}}, {{legal_address}}, {{email}}, {{phone_display}}… Syntaxe : « ## Titre », « - liste », **gras**.';
 SETTING_GROUPS.legal_mentions = { title: 'Mentions légales', fields: [{ name: 'legal_mentions', label: 'Texte de la page', type: 'rich', full: true, help: LEGAL_HELP }] };
 SETTING_GROUPS.legal_privacy = { title: 'Politique de confidentialité', fields: [{ name: 'legal_privacy', label: 'Texte de la page', type: 'rich', full: true, help: LEGAL_HELP }] };
-SETTING_GROUPS.legal_cgv = { title: 'Conditions générales de vente', fields: [{ name: 'legal_cgv', label: 'Texte de la page', type: 'rich', full: true, help: LEGAL_HELP }] };
 
 export const LEAD_STATUSES = ['nouveau', 'contacté', 'devis', 'gagné', 'perdu'];
 

@@ -18,6 +18,5 @@ export default async function sitemap() {
     ...posts.map((p) => ({ url: absUrl(`/blog/${p.slug}`), lastModified: p.published_at ? new Date(p.published_at) : now, changeFrequency: 'yearly', priority: 0.6 })),
     { url: absUrl('/mentions-legales'), lastModified: now, priority: 0.2 },
     { url: absUrl('/confidentialite'), lastModified: now, priority: 0.2 },
-    { url: absUrl('/cgv'), lastModified: now, priority: 0.2 },
   ];
 }

@@ -1,7 +1,6 @@
 import 'server-only';
 import { PDFDocument, StandardFonts, rgb } from 'pdf-lib';
 import { fmtEUR, fmtDate, lineTotal, computeTotals } from './money';
-import { absUrl } from './site';
 
 const NAVY = rgb(0.047, 0.145, 0.259);
 const GREY = rgb(0.38, 0.43, 0.49);
@@ -205,12 +204,11 @@ export async function buildDocumentPdf({ doc, client, settings }) {
     block('RÈGLEMENT', pay);
     block('CONDITIONS', [
       "En cas de retard de paiement, une pénalité égale à trois fois le taux d'intérêt légal sera appliquée, ainsi qu'une indemnité forfaitaire de 40 € pour frais de recouvrement (art. L441-10 du Code de commerce). Pas d'escompte pour paiement anticipé.",
-      `Prestation soumise aux conditions générales de vente : ${absUrl('/cgv')}`,
       settings.invoice_footer,
     ].filter(Boolean));
   } else {
     if (y < 160) newPage2();
-    block('CONDITIONS', [`Devis valable jusqu'au ${fmtDate(doc.due_date)}.`, `La signature de ce devis vaut acceptation des conditions générales de vente, consultables sur ${absUrl('/cgv')} ou remises sur demande.`, settings.quote_footer].filter(Boolean));
+    block('CONDITIONS', [`Devis valable jusqu'au ${fmtDate(doc.due_date)}.`, settings.quote_footer].filter(Boolean));
     if (y < 120) newPage2();
     page.drawRectangle({ x: W - M - 230, y: y - 78, width: 230, height: 78, borderColor: LINE, borderWidth: 1 });
     text('Bon pour accord, date et signature :', W - M - 220, y - 14, { size: 8.5, f: bold, color: GREY });
