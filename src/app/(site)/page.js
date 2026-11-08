@@ -316,12 +316,24 @@ export default async function Home() {
                 <Icon name="pin" /> {dept}
               </h3>
               <div className="chips">
-                {[...kinds.Ville, ...kinds.Station].map((z) => (
-                  <Link key={z.slug} href={`/zones/${z.slug}`} className={`chip ${z.kind === 'Station' ? 'station' : ''}`}>
+                {kinds.Ville.map((z) => (
+                  <Link key={z.slug} href={`/zones/${z.slug}`} className="chip">
                     {z.name}
                   </Link>
                 ))}
               </div>
+              {kinds.Station.length > 0 && (
+                <details className="zone-more">
+                  <summary>Stations de ski ({kinds.Station.length})</summary>
+                  <div className="chips">
+                    {kinds.Station.map((z) => (
+                      <Link key={z.slug} href={`/zones/${z.slug}`} className="chip">
+                        {z.name}
+                      </Link>
+                    ))}
+                  </div>
+                </details>
+              )}
             </div>
           ))}
         </div>

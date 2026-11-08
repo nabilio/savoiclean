@@ -1980,3 +1980,16 @@ a.card:hover .card-img img{transform:scale(1.06)}
 .adm-main .box{overflow-x:auto;max-width:100%}
 .adm-main table.t{min-width:560px}
 .footer-bottom .credit a{color:inherit;text-decoration:underline;text-underline-offset:3px}
+
+/* ---- Simplification : zones plus sobres + titre d'accueil ---- */
+.chips{gap:8px}
+.chip,.chip.station{padding:6px 13px;font-size:.88rem;font-weight:500;background:#fff;border-color:var(--line)}
+.zone-more{margin-top:14px}
+.zone-more summary{cursor:pointer;font-weight:600;color:var(--teal-600);font-size:.95rem;list-style:none;padding:6px 0}
+.zone-more summary::-webkit-details-marker{display:none}
+.zone-more summary::after{content:' ▾'}
+.zone-more[open] summary::after{content:' ▴'}
+.zone-more .chips{margin-top:10px}
+.footer-zones{gap:6px 18px}
+.hero h1{font-weight:600;letter-spacing:-.03em;line-height:1.08;max-width:14ch;color:var(--navy-900)}
+.hero h1 .hl{font-weight:700;background:none;padding:0;margin:0;border-radius:0;color:var(--teal-600);text-decoration:underline;text-decoration-color:rgba(255,201,77,.9);text-decoration-thickness:.07em;text-underline-offset:.16em;text-decoration-skip-ink:none}

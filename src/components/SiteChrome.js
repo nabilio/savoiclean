@@ -143,11 +143,12 @@ export function Footer({ settings, services, zones }) {
             </div>
           </div>
           <div className="footer-zones" aria-label="Zones d’intervention">
-            {zones.map((z) => (
+            {zones.slice(0, 8).map((z) => (
               <Link key={z.slug} href={`/zones/${z.slug}`}>
-                Nettoyage {z.name}
+                {z.name}
               </Link>
             ))}
+            <Link href="/zones">Toutes nos zones</Link>
           </div>
           <div className="footer-bottom">
             <span>

@@ -115,8 +115,8 @@ export default async function Pros() {
           </div>
           <div className="chips">
             {stations.map((z) => (
-              <Link key={z.slug} href={`/zones/${z.slug}`} className="chip station">
-                Nettoyage {z.name}
+              <Link key={z.slug} href={`/zones/${z.slug}`} className="chip">
+                {z.name}
               </Link>
             ))}
           </div>
