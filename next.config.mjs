@@ -11,6 +11,8 @@ const nextConfig = {
   poweredByHeader: false,
   reactStrictMode: true,
   serverExternalPackages: ['mysql2', 'bcryptjs'],
+  // Les photos peuvent faire jusqu'à 4 Mo (le défaut de Next.js est 1 Mo).
+  experimental: { serverActions: { bodySizeLimit: '6mb' } },
   async headers() {
     return [
       { source: '/:path*', headers: security },
