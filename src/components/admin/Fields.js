@@ -9,6 +9,8 @@ const OK = {
   status: 'Statut mis à jour.',
   paid: 'Paiement enregistré.',
   invoice: 'Facture créée à partir du devis.',
+  admin_added: 'Administrateur ajouté. Il activera la double authentification à sa première connexion.',
+  admin_deleted: 'Administrateur supprimé.',
 };
 const ERR = {
   required: 'Un champ obligatoire est manquant.',
@@ -23,6 +25,10 @@ const ERR = {
   code: 'Code de vérification incorrect.',
   limit: 'Trop de tentatives, réessayez plus tard.',
   nodelete: 'Suppression impossible pour ce document (une facture ne se supprime pas : annulez-la).',
+  adm_email: 'Adresse e-mail invalide.',
+  adm_exists: 'Un administrateur utilise déjà cette adresse e-mail.',
+  adm_last: 'Suppression impossible : il faut garder au moins un administrateur avec la double authentification activée.',
+  adm_missing: 'Administrateur introuvable.',
   phone: 'Numéro WhatsApp invalide (indicatif pays + numéro, chiffres uniquement).',
 };
 

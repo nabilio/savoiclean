@@ -131,7 +131,7 @@ export const SETTING_GROUPS = {
     fields: [
       { name: 'brand_name', label: 'Nom de la marque', type: 'text', required: true },
       { name: 'brand_slogan', label: 'Slogan du logo', type: 'text' },
-      { name: 'credit_text', label: 'Signature en bas de page', type: 'text', help: 'Ex. « Site réalisé par NR Infra ». Laissez vide pour ne rien afficher.' },
+      { name: 'credit_text', label: 'Signature en bas de page', type: 'text', help: 'Texte libre affiché sous le copyright. Laissez vide pour ne rien afficher.' },
       { name: 'credit_url', label: 'Lien de la signature (facultatif)', type: 'text', help: 'Adresse complète, ex. https://…' },
       { name: 'credit_legal', label: 'Conception et réalisation (mentions légales)', type: 'text', help: 'Laissez vide pour retirer cette rubrique des mentions légales.' },
       { name: 'brand_tagline', label: 'Texte du bandeau supérieur', type: 'text' },

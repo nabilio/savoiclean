@@ -364,3 +364,39 @@ export async function resetTotp(_prev, fd) {
   await endSession();
   redirect('/admin/login');
 }
+
+
+/* ---------------- Administrateurs ---------------- */
+const ADM = '/admin/parametres/administrateurs';
+
+export async function addAdmin(fd) {
+  const me = await requireAdmin();
+  if (!(await rateLimit(`addadm:${me.id}`, 6, 900))) go(ADM, 'err', 'limit');
+  if (!(await checkPassword(String(fd.get('current') || ''), me.pass_hash))) go(ADM, 'err', 'badpwd');
+  const email = String(fd.get('email') || '').trim().toLowerCase().slice(0, 190);
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) go(ADM, 'err', 'adm_email');
+  const pw = String(fd.get('password') || '');
+  if (pw !== String(fd.get('confirm') || '')) go(ADM, 'err', 'nomatch');
+  if (validatePassword(pw)) go(ADM, 'err', 'weakpwd');
+  if (await one('SELECT id FROM users WHERE email = ?', [email])) go(ADM, 'err', 'adm_exists');
+  const r = await run('INSERT INTO users (email, pass_hash, totp_enabled, session_version, created_at) VALUES (?,?,0,1,?)', [email, await hashPassword(pw), nowStamp()]);
+  await audit('admin_added', { userId: me.id, email: me.email, detail: email });
+  go(ADM, 'ok', 'admin_added');
+}
+
+export async function deleteAdmin(fd) {
+  const me = await requireAdmin();
+  const id = Number(fd.get('id'));
+  const target = await one('SELECT * FROM users WHERE id = ?', [id]);
+  if (!target) go(ADM, 'err', 'adm_missing');
+  const rest = await q('SELECT id, totp_enabled FROM users WHERE id <> ?', [id]);
+  // Jamais de verrouillage : il doit rester au moins un administrateur capable de se connecter (2FA activée).
+  if (!rest.some((u) => u.totp_enabled)) go(ADM, 'err', 'adm_last');
+  await run('DELETE FROM users WHERE id = ?', [id]);
+  await audit('admin_deleted', { userId: me.id, email: me.email, detail: target.email });
+  if (target.id === me.id) {
+    await endSession();
+    redirect('/admin/login');
+  }
+  go(ADM, 'ok', 'admin_deleted');
+}

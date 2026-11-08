@@ -17,6 +17,8 @@ const LABELS = {
   recovery_regenerated: 'Codes de secours régénérés',
   password_changed: 'Mot de passe modifié',
   logout: 'Déconnexion',
+  admin_added: 'Administrateur ajouté',
+  admin_deleted: 'Administrateur supprimé',
 };
 
 export default async function Security({ searchParams }) {

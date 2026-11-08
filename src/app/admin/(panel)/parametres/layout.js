@@ -8,6 +8,7 @@ export default function SettingsLayout({ children }) {
           { href: '/admin/parametres', label: 'Entreprise & contact' },
           { href: '/admin/parametres/facturation', label: 'Société & facturation' },
           { href: '/admin/parametres/securite', label: 'Sécurité' },
+          { href: '/admin/parametres/administrateurs', label: 'Administrateurs' },
         ]}
       />
       {children}
