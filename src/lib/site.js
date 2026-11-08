@@ -46,7 +46,13 @@ export async function getPost(slug) {
 }
 
 export function siteUrl() {
-  return (process.env.SITE_URL || 'http://localhost:3000').replace(/\/+$/, '');
+  let u = String(process.env.SITE_URL || 'http://localhost:3000').trim();
+  if (!/^https?:\/\//i.test(u)) u = 'https://' + u;
+  try {
+    return new URL(u).origin;
+  } catch {
+    return 'http://localhost:3000';
+  }
 }
 
 export function absUrl(path = '/') {
