@@ -1979,3 +1979,4 @@ a.card:hover .card-img img{transform:scale(1.06)}
 .adm-user .btn{white-space:nowrap}
 .adm-main .box{overflow-x:auto;max-width:100%}
 .adm-main table.t{min-width:560px}
+.footer-bottom .credit a{color:inherit;text-decoration:underline;text-underline-offset:3px}

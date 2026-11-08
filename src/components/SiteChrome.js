@@ -154,6 +154,17 @@ export function Footer({ settings, services, zones }) {
               © {new Date().getFullYear()} {settings.legal_name || settings.brand_name}. Tous droits réservés.
             </span>
             <span>Nettoyage en Savoie (73) et Haute-Savoie (74)</span>
+            {settings.credit_text ? (
+              <span className="credit">
+                {/^https?:\/\//.test(settings.credit_url || '') ? (
+                  <a href={settings.credit_url} target="_blank" rel="noopener noreferrer">
+                    {settings.credit_text}
+                  </a>
+                ) : (
+                  settings.credit_text
+                )}
+              </span>
+            ) : null}
           </div>
         </div>
       </footer>

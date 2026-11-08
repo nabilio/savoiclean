@@ -2,6 +2,9 @@
 export const DEFAULT_SETTINGS = {
   brand_name: 'SavoiClean',
   brand_slogan: 'Propre. Net. Sans souci.',
+  credit_text: 'Site réalisé par NR Infra',
+  credit_url: '',
+  credit_legal: 'NR Infra (SAS, 92 avenue de Turin, Chambéry, SIREN 953191988)',
   brand_tagline: 'Nettoyage professionnel · Savoie & Haute-Savoie',
   phone_display: '+33 7 53 32 78 16',
   whatsapp_number: '33753327816',

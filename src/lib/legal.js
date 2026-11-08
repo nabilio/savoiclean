@@ -30,7 +30,8 @@ export function fillLegal(text, s) {
       return empty && /^- /.test(line) ? null : out.replace(/\s{2,}/g, ' ').replace(/,\s*(?=[:.;])/g, '').replace(/ ([.,;:])/g, '$1');
     })
     .filter((l) => l !== null)
-    .join('\n');
+    .join('\n')
+    .replace(/^## [^\n]*\n(?=\n|$)/gm, '');
 }
 
 export function legalHash(s) {

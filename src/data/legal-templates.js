@@ -19,6 +19,9 @@ export const LEGAL_TEMPLATES = {
 ## Hébergement
 Ce site est hébergé par Hostinger International Ltd., 61 Lordou Vironos Street, 6023 Larnaca, Chypre – www.hostinger.fr.
 
+## Conception et réalisation
+- Site conçu et réalisé par {{credit_legal}}.
+
 ## Propriété intellectuelle
 L’ensemble des contenus de ce site (textes, photographies, illustrations, logo, structure) est protégé par le droit d’auteur et reste la propriété de l’éditeur ou de ses concédants. Toute reproduction, représentation ou réutilisation, même partielle, sans autorisation écrite préalable est interdite.
 
