@@ -2015,3 +2015,8 @@ a.card:hover .card-img img{transform:scale(1.06)}
   .hs-dots{justify-content:flex-start;left:auto;right:auto;padding-left:56px}
 }
 .hero h1{text-wrap:balance}
+
+/* Menu admin : jamais coupé, passe à la ligne */
+.adm-top .wrap{flex-wrap:wrap;row-gap:6px;padding-top:6px;padding-bottom:6px}
+.adm-nav{overflow:visible;flex:1 1 100%;order:3;flex-wrap:wrap}
+@media(min-width:1280px){.adm-nav{flex:1;order:0}}

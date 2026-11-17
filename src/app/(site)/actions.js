@@ -4,6 +4,7 @@ import { purgeIfDue } from '@/lib/purge';
 import { run, nowStamp } from '@/lib/db';
 import { rateLimit, clientIp } from '@/lib/auth';
 import { getSettings } from '@/lib/site';
+import { notifyAdmins } from '@/lib/mail';
 
 const clip = (v, n) => String(v ?? '').trim().slice(0, n);
 
@@ -38,24 +39,13 @@ export async function submitLead(_prev, formData) {
 
   purgeIfDue();
 
-  // Notification e-mail facultative (Resend) : RESEND_API_KEY + LEAD_NOTIFY_TO
-  try {
-    if (process.env.RESEND_API_KEY && process.env.LEAD_NOTIFY_TO) {
-      const s = await getSettings();
-      await fetch('https://api.resend.com/emails', {
-        method: 'POST',
-        headers: { Authorization: `Bearer ${process.env.RESEND_API_KEY}`, 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          from: process.env.LEAD_FROM || `${s.brand_name} <onboarding@resend.dev>`,
-          to: process.env.LEAD_NOTIFY_TO.split(',').map((x) => x.trim()),
-          reply_to: email || undefined,
-          subject: `Nouvelle demande de devis – ${name}`,
-          text: `Nom : ${name}\nEntreprise : ${company}\nTéléphone : ${phone}\nE-mail : ${email}\nService : ${service}\nLieu : ${zone}\n\n${message}`,
-        }),
-      });
-    }
-  } catch {
-    /* la demande est déjà enregistrée */
-  }
+  // Notification e-mail à tous les admins (SMTP ou Resend, voir README)
+  const s = await getSettings();
+  await notifyAdmins({
+    brand: s.brand_name,
+    replyTo: email,
+    subject: `Nouvelle demande de devis – ${name}`,
+    text: `Nom : ${name}\nEntreprise : ${company}\nTéléphone : ${phone}\nE-mail : ${email}\nService : ${service}\nLieu : ${zone}\n\n${message}\n\nÀ traiter dans l'administration › Demandes.`,
+  });
   return { ok: true };
 }

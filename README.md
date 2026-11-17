@@ -12,7 +12,7 @@ Site web d'une entreprise de nettoyage (Savoie / Haute-Savoie) : SEO local, form
    - Dossier de sortie : `.next`
 3. Définir les variables d'environnement (voir `.env.example`) : `DB_HOST=127.0.0.1`, `DB_NAME`, `DB_USER`, `DB_PASSWORD`, `APP_SECRET` (32+ caractères aléatoires), `SETUP_TOKEN`, `SITE_URL`.
    - `ALLOW_INDEXING=false` tant que le vrai domaine n'est pas branché, puis `true`.
-   - Facultatif : `RESEND_API_KEY`, `LEAD_NOTIFY_TO`, `LEAD_FROM` pour recevoir les demandes par e-mail.
+   - Facultatif (e-mail aux admins à chaque demande) : `SMTP_HOST` (smtp.hostinger.com), `SMTP_PORT` (465), `SMTP_USER`, `SMTP_PASSWORD` (boîte mail du site), `MAIL_FROM` ; ou `RESEND_API_KEY`. Les destinataires sont tous les comptes admin (+ `LEAD_NOTIFY_TO`).
 4. Relancer un build, puis ouvrir `/admin/setup`, saisir le `SETUP_TOKEN` et créer le compte administrateur (activer la 2FA dans Paramètres › Sécurité).
 5. Dans l'admin : **Paramètres › Entreprise / Société & facturation** (raison sociale, SIREN, adresse, TVA, capital, RCS, médiateur, IBAN, e-mail). Ces informations alimentent les pages légales et les PDF.
 6. Relire les **Pages légales** (Contenu › Pages légales) : ce sont des modèles à faire valider par l'éditeur.
